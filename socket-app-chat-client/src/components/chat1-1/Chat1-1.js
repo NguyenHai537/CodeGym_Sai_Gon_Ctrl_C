@@ -161,6 +161,7 @@ export default function Chat11() {
                   </span>
                 </div>
                 <textarea
+                  style={{color:"white"}}
                   name=""
                   class="form-control type_msg"
                   placeholder="Type your message..."

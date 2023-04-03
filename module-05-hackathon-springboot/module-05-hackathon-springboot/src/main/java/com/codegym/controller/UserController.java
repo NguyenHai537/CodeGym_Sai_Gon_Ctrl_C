@@ -7,11 +7,15 @@ import com.codegym.service.MessageService;
 import com.codegym.service.RoomService;
 import com.codegym.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -49,7 +53,7 @@ public class UserController {
     }
 
     @GetMapping("/get-users")
-    public ResponseEntity<List<User>> getUserList() {
+    public ResponseEntity<?> getUserList() {
         List<User> userList = userService.getAllUser();
         return new ResponseEntity<>(userList, HttpStatus.OK);
     }
@@ -147,6 +151,14 @@ public class UserController {
         }
         return null;
     }
+
+    @DeleteMapping("/delete/{data}")
+    public ResponseEntity<?> deleteUserByName(@PathVariable("data") String name){
+        userService.delete(name);
+        return new ResponseEntity<>("Da Xoa Thanh Cong", HttpStatus.OK);
+    }
+
+
 
 
 

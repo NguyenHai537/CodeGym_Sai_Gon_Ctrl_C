@@ -20,7 +20,7 @@ const SignupSchema = Yup.object().shape({
     .required("Phone là bắt buộc"),
 
   password: Yup.string()
-    .min(4, "Password phải có tối thiểu 4 kí tự")
+    .min(8, "Password phải có tối thiểu 8 kí tự")
     .matches(/^[a-zA-Z0-9!@#$%^&*)/(+=._-]*$/, "Password chứa ký tự không cho phép" )
     .required("Password là bắt buộc"),
     
@@ -82,31 +82,31 @@ export default function SignUp() {
       {({ values, errors, touched}) => (
         <Form style={{margin: 'auto',width: '250px'}}>
           <div className='custom-input'>
-            <label htmlFor="un">Username</label>
+            <label htmlFor="un" style={{color:"white"}}>Username</label>
             <Field  id = 'un' name="username" type="text" className = 'form-control' />
             {errors.username && touched.username ? (<div  className="error-message">{errors.username}</div>) : null}
             {console.log(errors.username)}
           </div>
           <div className='custom-input'>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email" style={{color:"white"}}>Email</label>
             <Field id = 'email' name="email" type="email" className = 'form-control'/>
             {errors.email && touched.email ? <div className="error-message">{errors.email}</div> : null}
           </div>
 
           <div className='custom-input'>
-            <label htmlFor="ph">Phone Number</label>
+            <label htmlFor="ph" style={{color:"white"}}>Phone Number</label>
             <Field  id = 'ph' name="phone" type="text" className = 'form-control' />
             {errors.phone && touched.phone? (<div  className="error-message">{errors.phone}</div>) : null}
             {console.log(errors.phone)}
           </div>
 
           <div className='custom-input'>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" style={{color:"white"}}>Password</label>
             <Field id = 'password' name="password" type='password' className = 'form-control'/>
             {errors.password && touched.password ? (<div className="error-message">{errors.password}</div>) : null}
           </div>
           <div className='custom-input'>
-            <label htmlFor="cpw">Confirm Password</label>
+            <label htmlFor="cpw" style={{color:"white"}}>Confirm Password</label>
             <Field id = 'cpw' name="confirmpassword" type='password' className = 'form-control'/>
             {errors.confirmpassword && touched.confirmpassword ? (<div className="error-message">{errors.confirmpassword}</div>) : null}
           </div>

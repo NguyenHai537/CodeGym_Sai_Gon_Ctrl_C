@@ -21,15 +21,15 @@ let listUser = [];
 let rooms11 = [];
 
 // Code by Long
-let chatRoomUsers = [];
 let allUsers = [];
 let rooms = [];
 let listMessage = [];
+let tempRoom = [];
 // ======================
 axios
       .get("http://localhost:8080/roomList")
       .then((res) => {
-        rooms = res.data;
+        rooms = res.data.roomForm;
         console.log(rooms)
       })
       .catch((err) => {
@@ -38,7 +38,7 @@ axios
       });
 
       axios
-      .get("http://localhost:8080/get-users")
+      .get("http://localhost:8080/get-users-if-online")
       .then((res) => {
         listUser = res.data;
         console.log(res.data);
@@ -66,6 +66,21 @@ socketIo.on("connection", (socket) => {
       });
   });
 
+  socket.on("searchRoom", (data) => {
+    const temp_room = {
+      roomForm: data,
+    };
+    rooms.map((room, index) =>
+      room.roomForm === temp_room.roomForm ? tempRoom.push(room.roomForm) : ""
+    );
+    socket.emit("searchTempRoom", tempRoom);
+    tempRoom = [];
+  });
+
+  socket.on("tempRooms", (data) => {
+    socket.emit("searchTempRoom", data);
+  });
+
   socket.on("listRooms", () => {
     
     axios
@@ -86,19 +101,7 @@ socketIo.on("connection", (socket) => {
 
   socket.on("send-rooms", function () {});
 
-  // axios
-  // .get("http://localhost:8080/roomList")
-  // .then((res) => {
-  //   rooms = res.data;
-  //   console.log(rooms);
-  //   socket.emit("get_room", rooms);
-  // })
-  // .catch((err) => {
-  //   console.log(err);
-  //   throw err;
-  // });
 
-  //Ben Chat.js khi user click vao avatar thi server tai vi tri nay se luu room 1-1
   socket.on("join-room-11", (data) => {
     let checkRoom = false;
 
@@ -136,7 +139,8 @@ socketIo.on("connection", (socket) => {
 
   socket.on("logout", (data) => {
     console.log(data.username);
-    axios.post(`http://localhost:8080/logout/${data}`).catch((err) => {
+    axios.post(`http://localhost:8080/logout/${data}`)
+    .catch((err) => {
       console.log(err);
       throw err;
     });
@@ -183,17 +187,21 @@ socketIo.on("connection", (socket) => {
   socket.on("add_room", (data) => {
     socket.room = data;
     socket.join(data);
+    const requestRoom ={
+      id:rooms[rooms.length -1].id +1,
+      roomForm: data
+    }
     axios
       .post(`http://localhost:8080/room/${data}`)
       .then((res) => {
-        
-        rooms.push(data);
+        rooms.push(requestRoom);
+        socket.emit("get_rooms",rooms);
       })
       .catch((err) => {
         console.log(err);
         throw err;
       });
-    
+    console.log(rooms)
   });
 
   socket.on("getRooms", () => {

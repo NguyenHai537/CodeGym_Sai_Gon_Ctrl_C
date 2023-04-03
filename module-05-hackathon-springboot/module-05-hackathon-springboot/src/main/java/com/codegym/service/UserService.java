@@ -3,8 +3,11 @@ package com.codegym.service;
 import com.codegym.entity.User;
 import com.codegym.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +29,18 @@ public class UserService {
         } return null;
     }
 
-    public List<User> getAllUser() {
-        return (List<User>) userRepository.findAll();
+
+    public List<User> getAllUser()  {
+        List<User> listUser = userRepository.findAll();
+        return listUser;
     }
+
+    public Page<User> getAllUserByName(String name,Pageable pageable)  {
+        Page<User> listUser = userRepository.findAllByUsernameContaining(name,pageable);
+        return listUser;
+    }
+
+
 
     public User getUserByUsername(String username) {
         return userRepository.getUserByUsername(username);
@@ -41,6 +53,11 @@ public class UserService {
 
     public List<User> getAllUserIfOnline() {
         return userRepository.getAllUserIfOnline();
+    }
+
+    @Transactional
+    public void delete(String name){
+        userRepository.deleteByUsername(name);
     }
 
 

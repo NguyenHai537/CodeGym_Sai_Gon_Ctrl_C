@@ -10,6 +10,7 @@ import Account from "./components/Account";
 import UpdateInfo from "./components/UpdateInfo";
 import SignUp from "./components/SignUp";
 import AddImage from "./components/AddImage";
+import Admin from "./components/Admin";
 
 const App = () => {
   return (
@@ -18,15 +19,10 @@ const App = () => {
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/chat/:username" element={<Chat />} />
+        <Route path="/admin" element={<Admin/>} />
         <Route path="/:username/info" element={<Account />} />
         <Route path="/:username/addimage" element={<AddImage/>} />
         <Route path="/:username/updateinfo" element={<UpdateInfo />} />
-
-
-
- {/* <Route path="/chat/:username" element={<Chat />} /> */}
-        {/* <Route path="/:username/info" element={<Account />} />
-        <Route path="/:username/updateinfo" element={<UpdateInfo />} /> */}
         <Route path="/chat1-1/:username/:room" element={<Chat11 />} />
         <Route path="/chatroom/:username/:room" element={<ChatRoom />} />
       </Routes>

@@ -55,7 +55,13 @@ export default function UpdateInfo() {
   return (
     <div class="container">
         <div class="card card-container">
-            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            {/* <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" /> */}
+            <img
+                src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                class="rounded-circle user_img mt-5"
+                style={{ width: 150, height: 150 }}
+                alt="avatar"
+              />
             <p id="profile-name" class="profile-name-card"></p>
             <form class="form-signin">
                 <span id="reauth-email" class="reauth-email"></span>

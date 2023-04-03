@@ -142,7 +142,10 @@ export default function Account() {
         <div class="col-md-12 col-xs-12" align="center" style={{ position: 'relative', backgroundImage: `url(https://res.cloudinary.com/dnevlrxnn/image/upload/v1679160458/z4193334745869_9a257afa077bd3c7d99f256db0445a5a_sm24t7.jpg)`, backgroundPosition: 'center center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
           <div style={{ position: 'relative', zIndex: 1 }}>
             <div class="outter">
-              <img src={resuser.image} class="image-circle" />
+              <img src={resuser.image} 
+              class="rounded-circle user_img mt-5"
+              style={{ width: 250, height: 250 }}
+              alt="avatar" />
             </div>
             <h1>{resuser.username}</h1>
           </div>
@@ -245,7 +248,6 @@ export default function Account() {
                 type="password"
                 disabled={!isEditedPassword}
                 class="form-control"
-                placeholder={resuser.password}
                 onChange={handleChangePassword}
               />
             </div>

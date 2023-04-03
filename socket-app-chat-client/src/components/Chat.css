@@ -5,7 +5,6 @@ body,html{
      background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
       background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
 }
-
 .chat{
   margin-top: auto;
   margin-bottom: auto;
@@ -91,14 +90,12 @@ background-color: rgba(0,0,0,0.3) !important;
 .user_img{
   height: 70px;
   width: 70px;
-  border:1.5px solid #f5f6fa;
-
+  border:1.5px solid #F5F6FA;
 }
 .user_img_msg{
   height: 40px;
   width: 40px;
-  border:1.5px solid #f5f6fa;
-
+  border:1.5px solid #F5F6FA;
 }
 .img_cont{
   position: relative;
@@ -113,14 +110,14 @@ background-color: rgba(0,0,0,0.3) !important;
 position: absolute;
 height: 15px;
 width:15px;
-background-color: #4cd137;
+background-color: #4CD137;
 border-radius: 50%;
 bottom: 0.2em;
 right: 0.4em;
 border:1.5px solid white;
 }
 .offline{
-background-color: #c23616 !important;
+background-color: #C23616 !important;
 }
 .user_info{
 margin-top: auto;
@@ -150,7 +147,7 @@ margin-top: auto;
 margin-bottom: auto;
 margin-left: 10px;
 border-radius: 25px;
-background-color: #82ccdd;
+background-color: #82CCDD;
 padding: 10px;
 position: relative;
 }
@@ -159,7 +156,7 @@ margin-top: auto;
 margin-bottom: auto;
 margin-right: 10px;
 border-radius: 25px;
-background-color: #78e08f;
+background-color: #78E08F;
 padding: 10px;
 position: relative;
 }
@@ -211,7 +208,6 @@ margin-bottom: 5px;
 }
 .action_menu ul li i{
 padding-right: 10px;
-
 }
 .action_menu ul li:hover{
 cursor: pointer;
