@@ -23,4 +23,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Page<User> findAllByUsernameContaining(String firstname, Pageable pageable);
 
     void deleteByUsername(String name);
+
+    //UserRepository
+    @Query("SELECT u FROM User u WHERE u.phone LIKE %?1%")
+    List<User> findUsersByPhone(String phone);
+
 }

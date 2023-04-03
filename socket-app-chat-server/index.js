@@ -58,6 +58,7 @@ socketIo.on("connection", (socket) => {
       .get("http://localhost:8080/get-users-if-online")
       .then((res) => {
         listUser = res.data;
+        socket.emit("send-list-user",listUser);
         console.log(res.data);
       })
       .catch((err) => {
@@ -95,6 +96,15 @@ socketIo.on("connection", (socket) => {
       });
   });
 
+  socket.on("send-search-phone", function(data) {
+    console.log(data)
+    axios
+    .get(`http://localhost:8080/find-users-by-phone/${data}`)
+    .then((res) => {
+      socket.emit("send-user-of-this-phone", res.data)
+    })
+  })
+  
   socketIo.sockets.emit("get_rooms", rooms);
 
   socketIo.sockets.emit("set-list", listUser);

@@ -61,5 +61,10 @@ public class UserService {
     }
 
 
+    public List<User> findUsersByPhone(String phone) {
+        return userRepository.findUsersByPhone(phone);
+    }
+
+
 
 }

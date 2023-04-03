@@ -206,4 +206,12 @@ public class UserController {
         User user = userService.getUserByUsername(name);
         return new ResponseEntity<>(user.getImage(), HttpStatus.OK);
     }
+
+    //Controller
+    @GetMapping("/find-users-by-phone/{data}")
+    public ResponseEntity<?> findUserByPhone(@PathVariable("data") String phone) {
+        System.out.println("Calling find users by phone: " + phone);
+        List<User> searchedUsersByPhone = userService.findUsersByPhone(phone);
+        return new ResponseEntity<>(searchedUsersByPhone, HttpStatus.OK);
+    }
 }

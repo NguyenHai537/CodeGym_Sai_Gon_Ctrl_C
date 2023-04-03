@@ -17,6 +17,7 @@ function Chat() {
   const inputEle = useRef();
   // ===========================================
   let { username } = useParams();
+  const [searchPhone, setSearchPhone] = useState("");
   const socketRef = useRef();
   const navigate = useNavigate();
   const [img, setImg] = useState("");
@@ -38,6 +39,11 @@ function Chat() {
       setRooms(data);
     });
 
+    socketRef.current.on("send-user-of-this-phone", (data) => {
+      console.log(data)
+      setListUser(data);
+    })
+
     socketRef.current.on("searchTempRoom", (data) => {
       setTempRoom(data);
     });
@@ -53,6 +59,14 @@ function Chat() {
       socketRef.current.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    if (searchPhone.length === 0) {
+      console.log("da nhay vao")
+      socketRef.current.emit("listUser");
+    }
+  }, [searchPhone])
+  
   // Coi, sửa thông tin user
   function HandleClickViewProfile() {
     navigate(`/${username}/info`);
@@ -71,6 +85,16 @@ function Chat() {
     }
   }
 
+  // Tim user bang sdt
+  function searchUserByPhone() {
+    console.log(searchPhone);
+    socketRef.current.emit("send-search-phone", searchPhone)
+  }
+  
+  function searchUserByPhoneForm(e) {
+    setSearchPhone(e.target.value);
+    // searchUserByPhone();
+  }
 
   const renderRooms =
   tempRoom.length === 0
@@ -179,7 +203,7 @@ function Chat() {
   return (
     <div class="container-fluid h-100">
       <div class="row justify-content-center h-100">
-        <div class="col-md-4 col-xl-3 chat">
+      <div class="col-md-4 col-xl-3 chat">
           <div class="card mb-sm-3 mb-md-0 contacts_card">
             <h2 style={{ textAlign: "center", color: "wheat" }}>
               Online Users
@@ -191,17 +215,23 @@ function Chat() {
                   placeholder="Search..."
                   name=""
                   class="form-control search"
+                  onChange={searchUserByPhoneForm}
                 />
-                <div class="input-group-prepend">
+                <div class="input-group-prepend" onClick={searchUserByPhone}>
                   <span class="input-group-text search_btn">
                     <i class="fas fa-search"></i>
                   </span>
                 </div>
               </div>
             </div>
-            <div class="card-body contacts_body">
-              <ui class="contacts">{renderMess}</ui>
-            </div>
+            {listUser
+              ?
+              <div class="card-body contacts_body">
+                <ui class="contacts">{renderMess}</ui>
+              </div>
+              :
+              alert("User not found")
+            }
             <div class="card-footer"></div>
           </div>
         </div>
